@@ -1,5 +1,7 @@
 FROM ubuntu:xenial
 
+RUN apt-get update
+
 RUN apt-get install -y apt-transport-https curl
 
 RUN curl https://winswitch.org/gpg.asc | apt-key add -
