@@ -1,3 +1,4 @@
+
 FROM centos:7
 
 
@@ -17,6 +18,7 @@ RUN yum update -q -y && \
     git \
     python-websockify \
     vim \
+    xterm \
     wget \
     which \
     x11-utils \
