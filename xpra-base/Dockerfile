@@ -6,7 +6,7 @@ RUN apt-get install -y apt-transport-https curl
 
 RUN curl https://winswitch.org/gpg.asc | apt-key add -
 
-RUN echo "deb http://winswitch.org/ trusty main" > /etc/apt/sources.list.d/winswitch.list; \
+RUN echo "deb http://winswitch.org/ xenial main" > /etc/apt/sources.list.d/winswitch.list; \
 	apt-get install -y software-properties-common; \
 	add-apt-repository universe; \
 	apt-get update; \
