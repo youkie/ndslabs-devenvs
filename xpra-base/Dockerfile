@@ -1,5 +1,7 @@
 FROM ubuntu:xenial
 
+RUN apt-get install -y apt-transport-https
+
 RUN apt-get install curl && curl https://winswitch.org/gpg.asc | apt-key add -
 
 RUN echo "deb http://winswitch.org/ trusty main" > /etc/apt/sources.list.d/winswitch.list; \
