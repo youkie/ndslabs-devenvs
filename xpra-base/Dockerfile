@@ -1,36 +1,18 @@
+FROM ubuntu:xenial
 
-FROM centos:7
+RUN apt-get install curl && curl https://winswitch.org/gpg.asc | apt-key add -
 
+RUN echo "deb http://winswitch.org/ trusty main" > /etc/apt/sources.list.d/winswitch.list; \
+	apt-get install -y software-properties-common; \
+	add-apt-repository universe; \
+	apt-get update; \
 
-# Base XPRA container for development environments
-# https://xpra.org/trac/wiki/Usage/Docker/CentOS
-# https://www.xpra.org/trac/wiki/Clients/HTML5
-
-RUN cd /etc/yum.repos.d && \
-    curl -O https://winswitch.org/downloads/CentOS/winswitch.repo && \
-    dbus-uuidgen >/etc/machine-id 
-
-RUN yum update -q -y && \
-    yum install -q -y epel-release && \
-    yum --enablerepo=epel install -q -y \
-    dejavu-sans-fonts \
-	dejavu-sans-mono-fonts \
-    git \
-    python-websockify \
-    vim \
-    xterm \
-    wget \
-    which \
-    x11-utils \
-	xfonts-base \
-    xorg-x11-server-Xvfb \
-    xpra 
-
-COPY index.html /usr/share/xpra/www
-COPY entrypoint.sh /
-VOLUME /root
-EXPOSE 10000
-
-CMD [ "/entrypoint.sh"]
+	apt-get install -y xpra; \
+	apt-get install -y xterm;
 
 
+
+
+EXPOSE 18888
+
+CMD [ "xpra start --bind-tcp=0.0.0.0:10000 --html=on --start-child=xterm"]
